@@ -33,6 +33,7 @@ typedef struct {
     /* User configurable variables */
     double attErrTolerance; //!< Normalized MRP attitude error tolerance
     unsigned int imaged;    //!< Indicator for whether or not the image has already been captured
+    unsigned int controllerStatus;  //!< dictates whether or not the controller should be running
 
     /* declare module IO interfaces */
     AccessMsg_C locationAccessInMsg;                   //!< Ground location access input message

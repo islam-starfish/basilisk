@@ -36,6 +36,7 @@
 void SelfInit_simpleInstrumentController(simpleInstrumentControllerConfig *configData, int64_t moduleID)
 {
     configData->imaged = 0;
+    configData->controllerStatus = 1;
     DeviceCmdMsg_C_init(&configData->deviceCmdOutMsg);
 }
 
@@ -85,20 +86,22 @@ void Update_simpleInstrumentController(simpleInstrumentControllerConfig *configD
     // Compute the norm of the attitude error
     sigma_BR_norm = v3Norm(attGuidInMsgBuffer.sigma_BR);
 
-    // If the target has not been imaged
-    if (!configData->imaged) {
-        /* If the attitude error is less than the tolerance and the groundLocation is accessible, turn on the instrument and
-        set the imaged indicator to 1*/
-        if ((sigma_BR_norm <= configData->attErrTolerance) && (accessInMsgBuffer.hasAccess)) {
-            deviceCmdOutMsgBuffer.deviceCmd = 1;
-            configData->imaged = 1;
-            // Otherwise, turn off the instrument
+    // If the controller is active
+    if (configData->controllerStatus) {
+        // If the target has not been imaged
+        if (!configData->imaged) {
+            /* If the attitude error is less than the tolerance and the groundLocation is accessible, turn on the instrument and
+            set the imaged indicator to 1*/
+            if ((sigma_BR_norm <= configData->attErrTolerance) && (accessInMsgBuffer.hasAccess)) {
+                deviceCmdOutMsgBuffer.deviceCmd = 1;
+                configData->imaged = 1;
+                // Otherwise, turn off the instrument
+            } else {
+                deviceCmdOutMsgBuffer.deviceCmd = 0;
+            }
         } else {
             deviceCmdOutMsgBuffer.deviceCmd = 0;
         }
-    }
-    else {
-        deviceCmdOutMsgBuffer.deviceCmd = 0;
     }
 
     // write to the output messages
