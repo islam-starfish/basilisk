@@ -19,13 +19,36 @@
 #ifndef _PRESCRIBEDTRANS_
 #define _PRESCRIBEDTRANS_
 
+#include <stdint.h>
+#include <stdbool.h>
 #include "architecture/utilities/bskLogging.h"
 #include "cMsgCInterface/PrescribedMotionMsg_C.h"
 #include "cMsgCInterface/PrescribedTransMsg_C.h"
-#include <stdint.h>
 
 /*! @brief Top level structure for the sub-module routines. */
 typedef struct {
+
+    /* User configurable variables */
+    double scalarAccelMax;                                          //!< [m/s^2] Maximum acceleration mag
+    double transAxis_M[3];                                          //!< Axis along the direction of translation
+    double r_FM_M[3];                                               //!< [m] Position of the frame F origin with respect to the M frame origin expressed in M frame components
+    double rPrime_FM_M[3];                                          //!< [m/s] B frame time derivative of r_FM_M expressed in M frame components
+    double rPrimePrime_FM_M[3];                                     //!< [m/s^] B frame time derivative of rPrime_FM_M expressed in M frame components
+    double omega_FM_F[3];                                           //!< [rad/s] Angular velocity of frame F with respect to frame M expressed in F frame components
+    double omegaPrime_FM_F[3];                                      //!< [rad/s^2] B frame time derivative of omega_FM_F expressed in F frame components
+    double sigma_FM[3];                                             //!< MRP attitude of frame F with respect to frame M
+
+    /* Private variables */
+    bool convergence;                                               //!< Boolean variable is true when the maneuver is complete
+    double tInit;                                                   //!< [s] Simulation time at the start of the maneuver
+    double scalarPosInit;                                           //!< [m] Initial distance between the frame F and frame M origin
+    double scalarVelInit;                                           //!< [m/s] Initial velocity between the frame F and frame M origin
+    double scalarPosRef;                                            //!< [m] Magnitude of the reference position vector
+    double scalarVelRef;                                            //!< [m/s] Magnitude of the reference velocity vector
+    double ts;                                                      //!< [s] Simulation time halfway through the maneuver
+    double tf;                                                      //!< [s] Simulation time at the time the maneuver is complete
+    double a;                                                       //!< Parabolic constant for the first half of the maneuver
+    double b;                                                       //!< Parabolic constant for the second half of the maneuver
 
     // Messages
     PrescribedTransMsg_C prescribedTransInMsg;                      //!< Input message for the reference states
