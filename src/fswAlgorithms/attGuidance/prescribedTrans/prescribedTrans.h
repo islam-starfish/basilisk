@@ -20,12 +20,18 @@
 #define _PRESCRIBEDTRANS_
 
 #include "architecture/utilities/bskLogging.h"
+#include "cMsgCInterface/PrescribedMotionMsg_C.h"
+#include "cMsgCInterface/PrescribedTransMsg_C.h"
 #include <stdint.h>
 
 /*! @brief Top level structure for the sub-module routines. */
 typedef struct {
 
-        BSKLogger *bskLogger;                                       //!< BSK Logging
+    // Messages
+    PrescribedTransMsg_C prescribedTransInMsg;                      //!< Input message for the reference states
+    PrescribedMotionMsg_C prescribedMotionOutMsg;                   //!< Output message for the prescribed states
+
+    BSKLogger *bskLogger;                                           //!< BSK Logging
 
 }PrescribedTransConfig;
 

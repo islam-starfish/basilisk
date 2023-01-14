@@ -31,6 +31,12 @@
 
 %include "prescribedTrans.h"
 
+%include "architecture/msgPayloadDefC/PrescribedMotionMsgPayload.h"
+struct PrescribedMotionMsg_C;
+
+%include "architecture/msgPayloadDefC/PrescribedTransMsgPayload.h"
+struct PrescribedTransMsg_C;
+
 %pythoncode %{
 import sys
 protectAllClasses(sys.modules[__name__])
