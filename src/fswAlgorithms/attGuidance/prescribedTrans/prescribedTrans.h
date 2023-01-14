@@ -19,10 +19,14 @@
 #ifndef _PRESCRIBEDTRANS_
 #define _PRESCRIBEDTRANS_
 
+#include "architecture/utilities/bskLogging.h"
 #include <stdint.h>
 
 /*! @brief Top level structure for the sub-module routines. */
 typedef struct {
+
+        BSKLogger *bskLogger;                                       //!< BSK Logging
+
 }PrescribedTransConfig;
 
 #ifdef __cplusplus
