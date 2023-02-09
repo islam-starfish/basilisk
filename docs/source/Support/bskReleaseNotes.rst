@@ -50,6 +50,8 @@ Version |release|
   to the spacecraft hub.
 - Added :ref:`solarArrayReference` to compute the reference angle and angle rate for a rotating solar array.
 - Update python dependency documentation and check to not use ``conan`` version 2.0.0 for now
+- Created :ref:`oneAxisSolarArrayPoint` to generate the reference attitude for a spacecraft that needs to point a body-fixed 
+  axis along an inertial direction while ensuring maximum power generation on the solar arrays
 
 Version 2.1.6 (Jan. 21, 2023)
 -----------------------------
