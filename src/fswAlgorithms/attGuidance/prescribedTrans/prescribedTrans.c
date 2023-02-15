@@ -27,6 +27,8 @@
  */
 void SelfInit_prescribedTrans(PrescribedTransConfig *configData, int64_t moduleID)
 {
+    // Initialize the module output message
+    PrescribedMotionMsg_C_init(&configData->prescribedMotionOutMsg);
 }
 
 /*! This method performs a complete reset of the module.  Local module variables that retain
