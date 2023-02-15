@@ -20,6 +20,9 @@
 /*! Import the module header file */
 #include "prescribedTrans.h"
 
+/* Other required files to import */
+#include <stdbool.h>
+
 /*! This method initializes the output message for this module.
  @return void
  @param configData The configuration data associated with this module
@@ -41,6 +44,16 @@ void SelfInit_prescribedTrans(PrescribedTransConfig *configData, int64_t moduleI
 */
 void Reset_prescribedTrans(PrescribedTransConfig *configData, uint64_t callTime, int64_t moduleID)
 {
+    // Check if the input message is connected
+    if (!PrescribedTransMsg_C_isLinked(&configData->prescribedTransInMsg)) {
+        _bskLog(configData->bskLogger, BSK_ERROR, "Error: prescribedTrans.prescribedTransInMsg wasn't connected.");
+    }
+
+    // Set the initial time
+    configData->tInit = 0.0;
+
+    // Set the initial convergence to true to enter the correct loop in the Update() method on the first pass
+    configData->convergence = true;
 }
 
 /*! This method uses the given initial and reference attitudes to compute the required attitude maneuver as
