@@ -106,18 +106,18 @@ def SCTranslation(show_plots):
 
     # Define initial conditions of the spacecraft
     scObject.hub.mHub = 100
-    scObject.hub.r_CN_NInit = [[-4020338.690396649],	[7490566.741852513],	[5248299.211589362]]
-    scObject.hub.v_CN_NInit = [[-5199.77710904224],	[-3436.681645356935],	[1041.576797498721]]
+    scObject.r_CN_NInit = [[-4020338.690396649],	[7490566.741852513],	[5248299.211589362]]
+    scObject.v_CN_NInit = [[-5199.77710904224],	[-3436.681645356935],	[1041.576797498721]]
 
     unitTestSim.InitializeSimulation()
     accuracy = 1e-3
     if not unitTestSupport.isArrayEqual(scObject.scStateOutMsg.read().r_BN_N,
-                                        [item for sublist in scObject.hub.r_CN_NInit for item in sublist],
+                                        [item for sublist in scObject.r_CN_NInit for item in sublist],
                                         3, accuracy):
         testFailCount += 1
         testMessages.append("FAILED: SCHub Translation test failed init pos msg unit test")
     if not unitTestSupport.isArrayEqual(scObject.scStateOutMsg.read().v_BN_N,
-                                        [item for sublist in scObject.hub.v_CN_NInit for item in sublist],
+                                        [item for sublist in scObject.v_CN_NInit for item in sublist],
                                         3, accuracy):
         testFailCount += 1
         testMessages.append("FAILED: SCHub Translation test failed init pos msg unit test")
@@ -241,8 +241,8 @@ def SCTransAndRotation(show_plots):
     scObject.hub.mHub = 100
     scObject.hub.r_BcB_B = [[0.0], [0.0], [0.0]]
     scObject.hub.IHubPntBc_B = [[500, 0.0, 0.0], [0.0, 200, 0.0], [0.0, 0.0, 300]]
-    scObject.hub.r_CN_NInit = [[-4020338.690396649],	[7490566.741852513],	[5248299.211589362]]
-    scObject.hub.v_CN_NInit = [[-5199.77710904224],	[-3436.681645356935],	[1041.576797498721]]
+    scObject.r_CN_NInit = [[-4020338.690396649],	[7490566.741852513],	[5248299.211589362]]
+    scObject.v_CN_NInit = [[-5199.77710904224],	[-3436.681645356935],	[1041.576797498721]]
     scObject.hub.sigma_BNInit = [[0.0], [0.0], [0.0]]
     scObject.hub.omega_BN_BInit = [[0.5], [-0.4], [0.7]]
 
@@ -656,8 +656,8 @@ def SCTransBOE(show_plots):
     scObject.hub.r_BcB_B = [[0.0], [0.0], [0.0]]
     scObject.hub.IHubPntBc_B = [[500, 0.0, 0.0], [0.0, 200, 0.0], [0.0, 0.0, 300]]
     # Set the initial values for the states
-    scObject.hub.r_CN_NInit = [[0.0], [0.0], [0.0]]
-    scObject.hub.v_CN_NInit = [[0.0], [0.0], [0.0]]
+    scObject.r_CN_NInit = [[0.0], [0.0], [0.0]]
+    scObject.v_CN_NInit = [[0.0], [0.0], [0.0]]
     scObject.hub.sigma_BNInit = [[0.0], [0.0], [0.0]]
     scObject.hub.omega_BN_BInit = [[0.0], [0.0], [0.0]]
 
@@ -799,8 +799,8 @@ def SCPointBVsPointC(show_plots):
     scObject.hub.mHub = 100
     scObject.hub.r_BcB_B = [[0.0], [0.0], [0.0]]
     scObject.hub.IHubPntBc_B = [[500, 0.0, 0.0], [0.0, 200, 0.0], [0.0, 0.0, 300]]
-    scObject.hub.r_CN_NInit = [[0.0],	[0.0],	[0.0]]
-    scObject.hub.v_CN_NInit = [[0.0],	[0.0],	[0.0]]
+    scObject.r_CN_NInit = [[0.0],	[0.0],	[0.0]]
+    scObject.v_CN_NInit = [[0.0],	[0.0],	[0.0]]
     scObject.hub.sigma_BNInit = [[0.0], [0.0], [0.0]]
     scObject.hub.omega_BN_BInit = [[0.5], [-0.4], [0.7]]
 
@@ -852,8 +852,8 @@ def SCPointBVsPointC(show_plots):
     scObject.hub.mHub = 100
     scObject.hub.r_BcB_B = [[rBcB_B[0]], [rBcB_B[1]], [rBcB_B[2]]]
     scObject.hub.IHubPntBc_B = [[500, 0.0, 0.0], [0.0, 200, 0.0], [0.0, 0.0, 300]]
-    scObject.hub.r_CN_NInit = [[0.0],	[0.0],	[0.0]]
-    scObject.hub.v_CN_NInit = [[0.0],	[0.0],	[0.0]]
+    scObject.r_CN_NInit = [[0.0],	[0.0],	[0.0]]
+    scObject.v_CN_NInit = [[0.0],	[0.0],	[0.0]]
     scObject.hub.sigma_BNInit = [[0.0], [0.0], [0.0]]
     scObject.hub.omega_BN_BInit = [[0.5], [-0.4], [0.7]]
 
@@ -964,8 +964,8 @@ def scOptionalRef(show_plots, accuracy):
     scObject.hub.mHub = 100
     scObject.hub.r_BcB_B = [[0.0], [0.0], [0.0]]
     scObject.hub.IHubPntBc_B = [[500, 0.0, 0.0], [0.0, 200, 0.0], [0.0, 0.0, 300]]
-    scObject.hub.r_CN_NInit = [[7000000.0],	[0.0],	[0.0]]
-    scObject.hub.v_CN_NInit = [[7000.0],	[0.0],	[0.0]]
+    scObject.r_CN_NInit = [[7000000.0],	[0.0],	[0.0]]
+    scObject.v_CN_NInit = [[7000.0],	[0.0],	[0.0]]
     scObject.hub.sigma_BNInit = [[0.5], [0.4], [0.3]]
     scObject.hub.sigma_BNInit = [[0.], [0.], [1.0]]
     scObject.hub.omega_BN_BInit = [[0.5], [-0.4], [0.7]]
@@ -1063,8 +1063,8 @@ def scAccumDV():
     scObject.hub.mHub = 100
     scObject.hub.r_BcB_B = [[0.0], [100.0], [0.0]]
     scObject.hub.IHubPntBc_B = [[500, 0.0, 0.0], [0.0, 200, 0.0], [0.0, 0.0, 300]]
-    scObject.hub.r_CN_NInit = [[-7000000.0],	[0.0],	[0.0]]
-    scObject.hub.v_CN_NInit = [[0.0],	[7000.0],	[0.0]]
+    scObject.r_CN_NInit = [[-7000000.0],	[0.0],	[0.0]]
+    scObject.v_CN_NInit = [[0.0],	[7000.0],	[0.0]]
     scObject.hub.sigma_BNInit = [[0.0], [0.0], [0.0]]
     scObject.hub.omega_BN_BInit = [[0.0], [0.0], [numpy.pi/180]]
 
@@ -1113,16 +1113,16 @@ def centerOfMassOffset(show_plots):
     # setup spacecraft 1
     sc1 = spacecraft.Spacecraft()
     sc1.ModelTag = 'sc1'
-    sc1.hub.r_CN_NInit = [5934995.24851425, 3426599.73774316, -76.8354385320663]
-    sc1.hub.v_CN_NInit = [491.178336784587, -850.601844642852, 7562.94203681626]
+    sc1.r_CN_NInit = [5934995.24851425, 3426599.73774316, -76.8354385320663]
+    sc1.v_CN_NInit = [491.178336784587, -850.601844642852, 7562.94203681626]
     sc1.hub.omega_BN_BInit = [2.0, 2.0, 2.0]
     sc1.hub.r_BcB_B = [1.0, 0.0, 0.0]
 
     # setup spacecraft 2
     sc2 = spacecraft.Spacecraft()
     sc2.ModelTag = 'sc2'
-    sc2.hub.r_CN_NInit = [5934995.24851425, 3426599.73774316, -76.8354385320663]
-    sc2.hub.v_CN_NInit = [491.178336784587, -850.601844642852, 7562.94203681626]
+    sc2.r_CN_NInit = [5934995.24851425, 3426599.73774316, -76.8354385320663]
+    sc2.v_CN_NInit = [491.178336784587, -850.601844642852, 7562.94203681626]
     sc2.hub.omega_BN_BInit = [2.0, 2.0, 2.0]
 
     # gravity

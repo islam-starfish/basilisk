@@ -74,7 +74,7 @@ This section is to outline the steps needed to setup a Spacecraft module in pyth
 
 #.  Define the initial conditions of the states::
 
-        scObject.hub.r_CN_NInit,  scObject.hub.v_CN_NInit, scObject.hub.sigma_BNInit, scObject.hub.omega_BN_BInit
+        scObject.r_CN_NInit,  scObject.v_CN_NInit, scObject.hub.sigma_BNInit, scObject.hub.omega_BN_BInit
 
 #.  Finally, add the spacecraft to the task::
 

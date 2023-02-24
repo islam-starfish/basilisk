@@ -59,7 +59,9 @@ public:
     Eigen::Vector3d sumForceExternal_N;  //!< [N] Sum of forces given in the inertial frame
     Eigen::Vector3d sumForceExternal_B;  //!< [N] Sum of forces given in the body frame
     Eigen::Vector3d sumTorquePntB_B;     //!< [N-m] Total torque about point B in B frame components
-    
+    Eigen::Vector3d r_CN_NInit;          //!< [m] Initial position of the spacecraft com
+    Eigen::Vector3d v_CN_NInit;          //!< [m/s Initial velocity of the spacecraft com
+
     Eigen::Vector3d dvAccum_CN_B;           //!< [m/s] Accumulated delta-v of center of mass relative to inertial frame in body frame coordinates
     Eigen::Vector3d dvAccum_BN_B;        //!< [m/s] accumulated delta-v of body frame relative to inertial frame in body frame coordinates
     Eigen::Vector3d nonConservativeAccelpntB_B;//!< [m/s/s] Current spacecraft body acceleration in the B frame
@@ -81,6 +83,7 @@ public:
     void initializeDynamics();           //!< -- This method initializes all of the dynamics and variables for the s/c
     void computeEnergyMomentum(double time);  //!< -- This method computes the total energy and momentum of the s/c
     void updateSCMassProps(double time);  //!< -- This method computes the total mass properties of the s/c
+    void registerStates(DynParamManager& states);
     void calcForceTorqueFromStateEffectors(double time, Eigen::Vector3d omega_BN_B);  //!< -- This method computes the force and torque from the stateEffectors
     void Reset(uint64_t CurrentSimNanos);
 	void writeOutputStateMessages(uint64_t clockTime); //!< -- Method to write all of the class output messages
@@ -92,14 +95,18 @@ public:
     void addDynamicEffector(DynamicEffector *newDynamicEffector);  //!< -- Attaches a dynamicEffector
 
 private:
-    StateData *hubR_N;                          //!< -- State data accesss to inertial position for the hub
-    StateData *hubV_N;                          //!< -- State data access to inertial velocity for the hub
+    StateData *r_RN_N;                          //!< [-] State data container for spacecraft center of mass position
+    StateData *v_RN_N;                          //!< [-] State data container for spacecraft center of mass velocity
+    StateData *r_BR_N;                          //!< -- State data container for hub B position offset from reference
+    StateData *v_BR_N;                          //!< -- State data container for hub B velocity offset from reference
     StateData *hubOmega_BN_B;                   //!< -- State data access to the attitude rate of the hub
     StateData *hubSigma;                        //!< -- State data access to sigmaBN for the hub
-    StateData *hubGravVelocity;                 //!< -- State data access to the gravity-accumulated DV on the Body frame
-    StateData *BcGravVelocity;                  //!< -- State data access to the gravity-accumulated DV on point Bc
     Eigen::MatrixXd *inertialPositionProperty;  //!< [m] r_N inertial position relative to system spice zeroBase/refBase
     Eigen::MatrixXd *inertialVelocityProperty;  //!< [m] v_N inertial velocity relative to system spice zeroBase/refBase
+    Eigen::Vector3d hubR_N;
+    Eigen::Vector3d hubV_N;
+    Eigen::Vector3d comR_N;
+    Eigen::Vector3d comV_N;
 
 
     Eigen::MatrixXd *m_SC;               //!< [kg] spacecrafts total mass
@@ -109,6 +116,7 @@ private:
     Eigen::MatrixXd *cPrime_B;           //!< [m/s] Body time derivative of c_B
     Eigen::MatrixXd *cDot_B;             //!< [m/s] Inertial time derivative of c_B
     Eigen::MatrixXd *ISCPntBPrime_B;     //!< [kg m^2/s] Body time derivative of ISCPntB_B
+    Eigen::MatrixXd *g_N;                //!< [m/s^2] Gravitational acceleration in N frame components
     Eigen::MatrixXd *sysTime;            //!< [s] System time
 
 private:
